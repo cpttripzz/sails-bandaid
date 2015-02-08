@@ -90,5 +90,8 @@
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
     <!--SCRIPTS END-->
+    <%if (sails.config.livereloadPath) { %>
+        < script src="<% sails.config.livereloadPath%>">< /script>
+    <% } %>
   </body>
 </html>

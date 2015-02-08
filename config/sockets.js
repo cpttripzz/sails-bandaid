@@ -170,7 +170,7 @@ module.exports.sockets = {
   * Warning: Currently in this scenario, CORS settings apply to interpreted  *
   * requests sent via a socket.io connection that used this cookie to        *
   * connect, even for non-browser clients! (e.g. iOS apps, toasters, node.js *
-  * unit tests)                                                              *
+  * unit test)                                                              *
   *                                                                          *
   ***************************************************************************/
 

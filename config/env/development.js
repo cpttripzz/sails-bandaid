@@ -17,8 +17,8 @@ module.exports = {
    * environment (see config/connections.js and config/models.js )           *
    ***************************************************************************/
 
-  // models: {
-  //   connection: 'someMongodbServer'
-  // }
-
+  jwt:  {
+    TOKEN_SECRET: 'Jjd8dm*(jd9j349K)j7%^*jd63je9sj783j39'
+  },
+  livereloadPath: "//localhost:35729/livereload.js"
 };
