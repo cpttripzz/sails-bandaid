@@ -7,54 +7,15 @@
  */
 
 module.exports = {
-  connection: 'localMysqlServer',
-  attributes: {
 
-    username: {
-      type: "string",
-      required: true,
-      unique: true,
-      minLength: 6
-    },
-    password: {
-      type: "string",
-      required: true
-    },
-    email: {
-      type: "email",
-      required: "true",
-      unique: true
-    },
-    toJSON: function() {
-      var obj = this.toObject();
-      delete obj.password;
-      return obj;
-    }
-  },
-  validPassword: function(password, user, cb) {
-    var bcrypt = require('bcrypt');
-    bcrypt.compare(password, user.password, function(err, match) {
-      if (err) cb(err);
+  attributes: require('waterlock').models.user.attributes({
 
-      if (match) {
-        cb(null, true);
-      } else {
-        cb(err);
-      }
-    });
-  },
-  beforeCreate: function (attrs, next) {
-    var bcrypt = require('bcrypt');
+    /* e.g.
+     nickname: 'string'
+     */
 
-    bcrypt.genSalt(10, function(err, salt) {
-      if (err) return next(err);
+  }),
 
-      bcrypt.hash(attrs.password, salt, function(err, hash) {
-        if (err) return next(err);
-
-        attrs.password = hash;
-        next();
-      });
-    });
-  }
+  beforeCreate: require('waterlock').models.user.beforeCreate,
+  beforeUpdate: require('waterlock').models.user.beforeUpdate
 };

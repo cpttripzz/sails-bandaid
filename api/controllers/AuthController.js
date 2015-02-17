@@ -3,45 +3,19 @@
  *
  * @module      :: Controller
  * @description	:: Provides the base authentication
+ *                 actions used to make waterlock work.
+ *
+ * @docs        :: http://waterlock.ninja/documentation
  */
 
-module.exports = {
-  authenticate: function(req, res) {
-    var username = req.param('username');
-    var password = req.param('password');
+module.exports = require('waterlock').waterlocked({
+  /* e.g.
+   action: function(req, res){
 
-    if ( !username || !password ) {
-      return res.json(401, {err: 'username and password required'});
-    }
+   }
+   */
+  //"facebook_oauth2": function(res,req) {
+  //  res.json({user: req.session.user.toJSON(), token: jwtToken.issueToken(req.session.user.id)});
+  //}
 
-    User.findOneByUsername(username, function(err, user) {
-      if (!user) {
-        return res.json(401, {err: 'invalid username or password'});
-      }
-
-      User.validPassword(password, user, function(err, valid) {
-        if (err) {
-          return res.json(403, {err: 'forbidden'});
-        }
-
-        if (!valid) {
-          return res.json(401, {err: 'invalid username or password'});
-        } else {
-          res.json({user: user.toJSON(), token: jwtToken.issueToken(user.id)});
-        }
-      });
-    })
-  },
-  register: function(req, res) {
-
-    User.create({username: req.body.username,  password: req.body.password, email: req.body.email}).exec(function(err, user) {
-      if (err) {
-        res.json(err.status, {err: err});
-        return;
-      }
-      if (user) {
-        res.json({user: user, token: jwtToken.issueToken(user.id)});
-      }
-    });
-  }
-};
+});
