@@ -7,7 +7,7 @@
  */
 
 module.exports = {
-  connection: 'localMysqlServer',
+  connection: 'localMongodbServer',
   attributes: {
 
     username: {

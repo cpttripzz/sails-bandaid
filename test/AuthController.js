@@ -1,19 +1,7 @@
 var request = require("supertest");
 var expect = require("chai").expect;
-var sails = require("sails");
 var should = require('should');
-var app;
 
-before(function(done) {
-    sails.lift({
-        log: {
-            level: "error"
-        }
-    }, function(err, sails) {
-        app = sails.hooks.http.app;
-        done();
-    });
-});
 
 describe("AuthController", function() {
     describe("register", function() {
@@ -23,7 +11,7 @@ describe("AuthController", function() {
                 "password": "password",
                 "email": "asdf@email.com"
             };
-            request(app)
+            request(sails.hooks.http.app)
                 .post("/auth/register")
                 .send(testUser)
                 .end(function(err, res) {
@@ -41,7 +29,7 @@ describe("AuthController", function() {
                 "password": "",
                 "email": "asdf@email.com"
             };
-            request(app)
+            request(sails.hooks.http.app)
                 .post("/auth/register")
                 .send(testUser)
                 .end(function(err, res) {
@@ -62,7 +50,7 @@ describe("AuthController", function() {
                 "password": "password",
                 "email": "asdf@email.com"
             };
-            request(app)
+            request(sails.hooks.http.app)
                 .post("/auth/authenticate")
                 .send(testUser)
                 .end(function(err, res) {
@@ -82,7 +70,7 @@ describe("AuthController", function() {
                 "password": "password",
                 "email": "asdf@email.com"
             };
-            request(app)
+            request(sails.hooks.http.app)
                 .post("/auth/authenticate")
                 .send(testUser)
                 .end(function(err, res) {
@@ -100,7 +88,7 @@ describe("AuthController", function() {
                 "password": "1233",
                 "email": "asdf@email.com"
             };
-            request(app)
+            request(sails.hooks.http.app)
                 .post("/auth/authenticate")
                 .send(testUser)
                 .end(function(err, res) {
